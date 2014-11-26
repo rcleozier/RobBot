@@ -24,7 +24,6 @@ quotes = ["You know I'm the first rapper to adopt a tabby cat. You know I adopte
 "Nobody in this building asked to be born. You didn't ask to be you, bro. I didn't ask to be me. I didn't ask to have this skin. I didn't ask to be who I was, bro. Nobody in here asked that... So when you see people, forgive them and accept, you feel me?",
 "Seeing these ants and studying them and respecting them, it's like, man, they're in their own community too. They're trying to survive. They love. They fight. They telling themselves something. We can't understand, but one day we will. I'm trying hard to figure it out.",
 "We're very smart animals, you know, or whatever we are. Organisms? What are we? What do y'all think we are? Is there like a fact? Does anybody have any proof what we are? Come up with your theories man.",
-"I looked up what black means online, and black means something like coal, you feel me?",
 "I'm feeling like Michael Jackson out there, whipping the wrist like br-br-br-da! But I'm too subtle now.",
 "I woulda come up here in a suit so y'all could take me seriously. I take y'all so seriously. I take The Based God seriously.",
 "How lucky we are to have this structure. Who built this? Tell me who built this building, please.",
@@ -40,15 +39,23 @@ quotes = ["You know I'm the first rapper to adopt a tabby cat. You know I adopte
 "I better not talk about Mitt [Romney] or you might not see me. What happened to Lil B? Lil B is in jail. Why is he in jail? Imprisoned by the government. Lil B made jokes about Mitt Romney at NYU and he's in prison for some reason.",
 "Support humans. I put out money. I spend my money in America because this is our money. I'm about to pay taxes, and I'm happy because of that. I'm happy. I don't know what it's going for, and I pray it's going to the people. The government says that and I'm going to give them the benefit of the doubt. But, hey, look, anybody is smart and has some facts, let me know. But until further notice, I'm paying taxes and I'm loving it.",
 "Be bilingual and go learn some slang. Fo sheezy!",
-"What is based? What does based mean? Shwoo. Shwoo. Shwoo."
+"What is based? What does based mean? Shwoo. Shwoo. Shwoo.",
+"I think I'm basedgod with a arc like noah.",
+"Swag to the maximum.",
+"A lot of people said I would never do it, that's what scares me.",
+"I'm paris hilton woo woo swag.",
+"He who walks his own path of greatness will never be ancient.",
+"What are you gonna do when the lions eat you?!"
 ]
 
 signatures = ["- Based God",
 "- Based",
 "- Based God, Signing Out"
-"- BG"
 "- Lil B"
-"- Lil B, Based God"
+"- Lil B, Based God",
+"- The BasedGod",
+"- Lil Boss"
+"- BasedGod"
 ]
 
 module.exports = (robot) ->

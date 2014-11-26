@@ -8,14 +8,14 @@
 #   None
 #
 # Commands:
-#   imdb me {movie}
+#   imdb {movie}
 #
 # Author:
 #   Robbins Cleozier
 
 module.exports = (robot) ->
-  robot.hear /(imdb)( me)? (.*)/i, (msg) ->
-    getMovieDetails msg, msg.match[3], (movieInfo) ->
+  robot.hear /(imdb) (.*)/i, (msg) ->
+    getMovieDetails msg, msg.match[2], (movieInfo) ->
       msg.send movieInfo
 
   getMovieDetails = (msg, query, cb) ->
