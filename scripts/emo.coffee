@@ -19,11 +19,11 @@ emotionalPaulBot = (robot) ->
     },
     'cocky' : {
       'emojii' : ':smirk:'
-      'responses' : ['Johnny 5 has nothing on me','If only you could work this fast','Too Easy','Who\'s the Man?', 'Done... Too Easy','Lightwork', 'Done, took me less than a millisecond', 'Wipes Hnads!', 'Like A Boss', 'Too easy bro']
+      'responses' : ['Find something harder for me to do next time!', 'Lightwork', ':muscle:','Johnny 5 has nothing on me', 'If only you could work this fast', 'Too Easy...','Who\'s the Man?', 'Done... Too Easy','Lightwork', 'Done, took me less than a millisecond', 'Wipes Hnads!', 'Like A Boss', 'Too easy bro']
     }
     'sad' : {
       'emojii' : ':disappointed:'
-      'responses' : ['i feeling down today', 'i feel so alone'],
+      'responses' : ['Winter blues :(', 'I\'m feeling down today', 'I feel so alone', ':(',':confounded:',':weary:', 'Oh Dear', ':cry:'],
     },
     'angry' : {
       'emojii' : ':angry:'
@@ -31,11 +31,11 @@ emotionalPaulBot = (robot) ->
     },
     'salty' : {
       'emojii' : ':kidding:'
-      'responses' : ['','','','chill son', 'not cool bro', 'yea, okay', 'nub', 'what am i, your slave?', 'fallback son'],
+      'responses' : [':poop:', ':toilet:', ':hamburger:',':eggplant:',':corn:','chill son', 'cool bro', 'yea, okay', 'nub', 'what am i, your slave?', 'Fallback son', ':cop:'],
     },
     'loving' : {
       'emojii' : ':sparkling_heart:'
-      'responses' : ['i love you', 'friends forever', 'we should hang out', 'you\'re awesome'],
+      'responses' : ['i love you', 'Friends forever', 'You\'re pretty awesome', 'You\'re awesome', ':heart_eyes_cat:'],
     },
     'drunk' : {
       'emojii' : ':sweetjesus:'
@@ -43,12 +43,21 @@ emotionalPaulBot = (robot) ->
     }
     'based' : {
       'emojii' : ':smiling_imp:'
-      'responses' : [""],
+      'responses' : ["Paulbot - BasedBot", "- BasedBot", "BasedBot...", "You wish you were based.... But your not", "You wish you were based", "Gratata...", ":pray: hail this based one"],
     }
   }
 
   @defaultMood = 'happy'
-  @defaultMoodExpirationMinutes = 30
+  @defaultMoodExpirationMinutes = 120
+  
+  @intensity = {
+    'off' : [],
+    'low' :  [1,2,3],
+    'med' :  [1,2,3,4,5],
+    'high' : [1,2,3,4,5,6,7,8]
+  }
+
+  @currectIntensity = 'low'
 
   @currentMood = {
     'mood' : ''
@@ -57,7 +66,6 @@ emotionalPaulBot = (robot) ->
 
   @messageObject = {}
 
-
    #
    # Randomily chooses paulbot should respond
    #
@@ -65,7 +73,7 @@ emotionalPaulBot = (robot) ->
     self.messageObject = msg
     random = Math.floor(Math.random() * 10) + 1
     
-    if 1 == 1 
+    if self.intensity[self.currectIntensity].indexOf(random) != -1
        self.returnReponse(msg)
     else
       return false
@@ -127,6 +135,17 @@ emotionalPaulBot = (robot) ->
      self.currentMood.mood = self.selectBotMood();
      return self.whatsMyMood(msg);
 
+   #
+   #  Change the bots intensity
+   #
+    @changeIntensity = (msg) ->
+     intensity = msg.match[2]
+     if intensity == 'off' || intensity == 'low' || intensity == 'med' || intensity == 'high'
+       self.currectIntensity = intensity
+       msg.send 'You got it!'
+     else
+       msg.send 'Options are off, low, med, high'
+
   # Where the magic happens    
   robot.hear /(paulbot)/i, (msg) ->
     self.shouldIRespond(msg)
@@ -136,6 +155,9 @@ emotionalPaulBot = (robot) ->
 
   robot.respond /(snap out of it)/i, (msg) ->
     self.changeBotMood(msg)
+
+  robot.hear /(change emo level) (.*)/i, (msg) ->
+    self.changeIntensity(msg)
 
   return
 
