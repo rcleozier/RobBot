@@ -2,7 +2,7 @@
 #   Get insightful quotes from the Based God - LIL. B
 #
 # Commands:
-#   "Based" -> Displays an insightful, thought provoking Lil B. quote 
+#   "Based" -> Displays an insightful, thought provoking Lil B. quotes 
 #
 # Author:
 #   Robbins Cleozier
