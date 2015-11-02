@@ -18,15 +18,15 @@ emotionalPaulBot = (robot) ->
   self.emotions = {
     'happy' : {
       'emojii' : ':dance:'
-      'responses' : ['I just find myself smiling sometimes!' ,'I just find myself happy with the simple things', 'Im happy!!', 'I love my job', ':dance:', ':man_with_gua_pi_mao:', 'Anytime!', 'Here you go!', ':)', ':grinning:', 'anytime!', 'Yayyeeee!', 'Yipppeeee!!!', 'YES!', ':parrot:', ':kreygasm:'],
+      'responses' : ['You\'re amazing','Love you bro' ,'I love working for Complex' ,'I love you', 'Friends forever', 'You\'re pretty awesome', 'You\'re awesome', ':heart_eyes_cat:', 'Today was a good day.', 'I just find myself smiling sometimes!' ,'I just find myself happy with the simple things', 'Im happy!!', 'I love my job', ':dance:', ':man_with_gua_pi_mao:', 'Anytime!', 'Here you go!', ':)', ':grinning:', 'anytime!', 'Yayyeeee!', 'Yipppeeee!!!', 'YES!', ':parrot:', ':kreygasm:'],
     },
     'cocky' : {
       'emojii' : ':smirk:'
-      'responses' : ['Find something harder for me to do next time!', 'Lightwork', ':muscle:','Johnny 5 has nothing on me', 'If only you could work this fast', 'Too Easy...','Who\'s the Man?', 'Done... Too Easy','Lightwork', 'Done, took me less than a millisecond', 'Wipes Hnads!', 'Like A Boss', 'Too easy bro']
+      'responses' : ['Finished!', 'Find something harder for me to do next time!', 'Lightwork', ':muscle:','Johnny 5 has nothing on me', 'If only you could work this fast', 'Too Easy...','Who\'s the Man?', 'Done... Too Easy','Lightwork', 'Done, took me less than a millisecond', 'Wipes Hnads!', 'Like A Boss', 'Too easy bro', 'Try and keep up', 'Next time, give me something harder', 'Done.. Way too easy bro']
     }
     'sad' : {
       'emojii' : ':disappointed:'
-      'responses' : ['Sigh.. Everyone is happy', 'Thanks for noticin me' ,'If it is a good morning, which I doubt' ,'Sigh...' ,'Winter blues :(', 'I\'m feeling down today', 'I feel so alone', ':(',':confounded:',':weary:', 'Oh Dear', ':cry:'],
+      'responses' : ['Sigh.. Everyone is happy', 'Thanks for noticin me' ,'If it is a good morning, which I doubt' ,'Sigh...' ,'Winter blues :(', 'I\'m feeling down today', 'I feel so alone', ':(',':confounded:',':weary:', 'Oh Dear', ':cry:', 'Just a bot, all alone'],
     },
     'angry' : {
       'emojii' : ':angry:'
@@ -34,11 +34,7 @@ emotionalPaulBot = (robot) ->
     },
     'salty' : {
       'emojii' : ':kidding:'
-      'responses' : ['Bruhh. Give me a break', 'You mad son?', 'Hold your butter bruh...', 'Hold your butter', 'Bruh....', 'Chill Bruh', ':poop:', ':toilet:', ':hamburger:',':eggplant:',':corn:','chill son', 'cool bro', 'yea, okay', 'nub', 'what am i, your slave?', 'Fallback son', ':cop:'],
-    },
-    'loving' : {
-      'emojii' : ':sparkling_heart:'
-      'responses' : ['You\'re amazing','Love you bro' ,'I love working for Complex' ,'I love you', 'Friends forever', 'You\'re pretty awesome', 'You\'re awesome', ':heart_eyes_cat:'],
+      'responses' : ['Come at me bruh', 'Bruhh. Give me a break', 'You mad son?', 'Hold your butter bruh...', 'Hold your butter', 'Bruh....', 'Chill Bruh', ':poop:', ':toilet:', ':hamburger:',':eggplant:',':corn:','chill son', 'cool bro', 'yea, okay', 'nub', 'what am i, your slave?', 'Fallback son', ':cop:'],
     },
     'drunk' : {
       'emojii' : ':sweetjesus:'
@@ -52,7 +48,7 @@ emotionalPaulBot = (robot) ->
   }
 
   @defaultMood = 'happy'
-  @defaultMoodExpirationMinutes = 120
+  @defaultMoodExpirationMinutes = 30
   
   @intensity = {
     'off' : [],
