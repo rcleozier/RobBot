@@ -10,42 +10,155 @@
 
 module.exports = function(robot) {
 
-    var devices = [
+    var seed = [
       {
         'name' : 'Apple Iphone 5',
-        'specs' : 'Fast!',
-        'type' : 'Phone'
       },
       {
         'name' : 'Apple Iphone 6',
-        'specs' : 'Fast!',
-        'type' : 'Phone'
       },
       {
         'name' : 'Samsung Galaxy S4',
-        'specs' : 'Fast!',
-        'type' : 'Phone'
       },
       {
-        'name' : 'Moto X',
-        'specs' : 'Fast!',
-        'type' : 'Phone'
+        'name' : 'HTC One',
+      },
+      {
+        'name' : 'Google Nexus 7',
       },
       {
         'name' : 'Galaxy Tab',
-        'specs' : 'Fast!',
-        'type' : 'Tablet'
+      },
+      {
+        'name' : 'Apple Ipad',
+      },
+      {
+        'name' : 'Apple Ipad Mini',
       },
       {
         'name' : 'Lenevo Thinkpad',
-        'specs' : 'Fast!',
-        'type' : 'Laptop'
+      },
+      {
+        'name' : 'Digital Loaner Laptop',
+      },
+      {
+        'name' : 'Apple Iphone Charger',
+      },
+      {
+        'name' : 'Android Charger',
       },
     ];
 
-    robot.respond(/(devices|qa)/i, function(msg) {
-      devices.forEach(function(device){
-        msg.send(device.name + " - Device Type: " + device.type);
+    // msg.message.user.name
+    var generateId = function() {
+      return Math.random().toString(36).substr(2, 3);
+    };
+
+    var setDevices = function(devices) {
+      robot.brain.set('devices', devices);
+    };
+
+    robot.respond(/(return) (.*)/i, function(msg) {
+      var deviceId = msg.match[2].trim().toLowerCase();
+      var user = msg.message.user.name;
+      var devices = robot.brain.get('devices');
+      var found = false;
+
+      devices.forEach(function(device) {
+        if (deviceId == device.id ) {
+          found = true;
+          if (device.out != user) {
+            msg.send("You haven't checked out the " + device.name);
+          } else {
+            device.out = false;
+            setDevices(devices);
+            msg.send("You have returned the " + device.name);
+          }
+        }
       });
+
+      if (!found) {
+        msg.send("Device could not be found " + deviceId);
+      }
+    });
+
+    robot.respond(/(checkout) (.*)/i, function(msg) {
+      var deviceId = msg.match[2].trim().toLowerCase();
+      var user = msg.message.user.name;
+      var devices = robot.brain.get('devices');
+      var found = false;
+
+      devices.forEach(function(device) {
+        if (deviceId == device.id ) {
+          found = true;
+          if (device.out != false) {
+            msg.send(device.name + " is currently checked out by " + device.out);
+          } else {
+            device.out = user;
+            setDevices(devices);
+            msg.send("You have checked out the " + device.name);
+          }
+        }
+      });
+
+      if (!found) {
+        msg.send("Device could not be found " + deviceId);
+      }
+    });
+
+    robot.respond(/(seed all devices)/i, function(msg) {
+      var devices = robot.brain.get('devices');
+
+      if (!devices) {
+
+        seed.forEach(function(s) {
+          s.id = generateId();
+          s.out = false;
+        });
+
+        robot.brain.set('devices', seed);
+
+        msg.send("Successfully seeded devices");
+      } else {
+        msg.send("Already seeded devices");
+      }
+    });
+
+    robot.respond(/(add device) (.*)/i, function(msg) {
+      var devices = robot.brain.get('devices');
+      var newDeviceName = msg.match[2].trim().toLowerCase();
+      var newDevice = {
+        'id' : generateId(),
+        'name' : newDeviceName,
+        'out' : false
+      };
+
+      if (!devices) {
+        devices = [newDevice];
+      }
+      else {
+        devices.push(newDevice);
+      }
+
+      setDevices(devices);
+      msg.send('Successfully added ' + newDevice.name);
+    });
+
+    robot.respond(/(devices)/i, function(msg) {
+      var devices  = robot.brain.get('devices');
+
+      if (!devices) {
+        msg.send('No devices found.');
+      }
+      else {
+        devices.forEach(function(device) {
+          if (device.out != false) {
+            msg.send("id: " + device.id +  " " + device.name + " - Checked out by " + device.out);
+            return;
+
+          }
+          msg.send("id: " + device.id +  " " + device.name);
+        });
+      }
     });
 }
