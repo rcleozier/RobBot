@@ -2,8 +2,12 @@
 // List of QA devices
 //
 // Commands:
+// Paulbot seed devices - Perform initial seed of devices
 // Paulbot devices - Get list of devices
-// Paulbot qa - Get list of devices
+// Paulbot add device {name} - Add device by name
+// Paulbot remove device {id} - Remove device by id
+// Paulbot checkout {id} - Checkout device with id
+// Paulbot return {id} - Return device with id
 //
 // Author:
 // Robbins Cleozier
@@ -57,6 +61,10 @@ module.exports = function(robot) {
     var setDevices = function(devices) {
       robot.brain.set('devices', devices);
     };
+
+    var titleCase = function(str) {
+      return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();})
+    }
 
     robot.respond(/(return) (.*)/i, function(msg) {
       var deviceId = msg.match[2].trim().toLowerCase();
@@ -124,12 +132,28 @@ module.exports = function(robot) {
       }
     });
 
+    robot.respond(/(remove device) (.*)/i, function(msg) {
+      var devices = robot.brain.get('devices');
+      var deviceId = msg.match[2].trim().toLowerCase();
+
+      for(var i = devices.length - 1; i >= 0; i--) {
+        if(devices[i].id === deviceId) {
+          devices.splice(i, 1);
+          setDevices(devices);
+          msg.send('Successfully removed device');
+          return true;
+        }
+      }
+
+      msg.send('Device not found to be removed');
+    });
+
     robot.respond(/(add device) (.*)/i, function(msg) {
       var devices = robot.brain.get('devices');
-      var newDeviceName = msg.match[2].trim().toLowerCase();
+      var name = titleCase(msg.match[2].trim().toLowerCase());
       var newDevice = {
         'id' : generateId(),
-        'name' : newDeviceName,
+        'name' : name,
         'out' : false
       };
 
@@ -141,7 +165,7 @@ module.exports = function(robot) {
       }
 
       setDevices(devices);
-      msg.send('Successfully added ' + newDevice.name);
+      msg.send('Successfully added ' + name);
     });
 
     robot.respond(/(devices)/i, function(msg) {
